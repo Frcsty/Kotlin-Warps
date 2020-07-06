@@ -3,7 +3,7 @@ package com.github.frcsty.warps.`object`
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
-class WarpObject(
+data class WarpObject(
 		private val location: Location,
 		private var name: String,
 		val owner: Player)

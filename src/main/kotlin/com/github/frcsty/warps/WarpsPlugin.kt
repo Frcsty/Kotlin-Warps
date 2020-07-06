@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class WarpsPlugin : JavaPlugin()
 {
 	
-	private var handler: WarpHandler = WarpHandler()
+	private val handler = WarpHandler()
 	
 	override fun onEnable()
 	{

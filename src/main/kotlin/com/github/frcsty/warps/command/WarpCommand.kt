@@ -8,17 +8,21 @@ import me.mattstudios.mf.base.CommandBase
 import org.bukkit.entity.Player
 
 @Command("warp")
-class WarpCommand(
-		private val handler: WarpHandler
-                 ) : CommandBase()
+class WarpCommand(private val handler: WarpHandler) : CommandBase()
 {
+	
+	companion object {
+		private const val CREATE: String = "create"
+		private const val REMOVE: String = "remove"
+		private const val RENAME: String = "rename"
+	}
 	
 	@Default
 	fun warpCommand(player: Player, warp: String)
 	{
 		val warpObject = handler.getWarp(warp)
 		
-		if (warp == "create" || warp == "remove" || warp == "rename")
+		if (warp == CREATE || warp == REMOVE || warp == RENAME)
 		{
 			player.sendMessage("Those are not valid warps, and should be used as commands.")
 			return
@@ -33,7 +37,7 @@ class WarpCommand(
 		warpObject.teleport(player)
 	}
 	
-	@SubCommand("create")
+	@SubCommand(CREATE)
 	fun warpCreateCommand(player: Player, warp: String)
 	{
 		if (handler.addWarp(warp, player.location, player))
@@ -45,7 +49,7 @@ class WarpCommand(
 		player.sendMessage("Failed to create a warp, as a equally named one already exists!")
 	}
 	
-	@SubCommand("remove")
+	@SubCommand(REMOVE)
 	fun warpRemoveCommand(player: Player, warp: String)
 	{
 		val warpObject = handler.getWarp(warp)
@@ -68,12 +72,13 @@ class WarpCommand(
 		}
 	}
 	
-	@SubCommand("rename")
+	@SubCommand(RENAME)
 	fun warpRenameCommand(player: Player, warp: String, name: String)
 	{
 		val warpObject = handler.getWarp(warp)
 		
-		if (warpObject == null) {
+		if (warpObject == null)
+		{
 			player.sendMessage("The specified warp does not exist!")
 			return
 		}

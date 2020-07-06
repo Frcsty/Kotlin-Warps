@@ -36,13 +36,6 @@ class WarpHandler
 	
 	fun getWarp(warp: String): WarpObject?
 	{
-		val existing = this.warps[warp] != null
-		
-		if (existing.not())
-		{
-			return null
-		}
-		
 		return this.warps[warp]
 	}
 	
